@@ -1,4 +1,3 @@
- const [chartData, setChartData] = React.useState(null)
  const [settings, setSettings] = React.useState({})
  const [chartRef, setChartRef] = React.useRef(null)
  const [data, setData] = React.useState(null)
@@ -15,7 +14,7 @@
  }
  return (
    <div>
-     <Chart ref={chartRef} settings={settings} />
+     <Chart ref={chartRef} />
      <div className="chart-controls">
        <button onClick={toggleSettings}>
          Toggle Liquidation Price
