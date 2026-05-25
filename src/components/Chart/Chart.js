@@ -22,7 +22,7 @@
        </button>
        <div style={styles.liquidationPrice}>
          {liquidationPrice}
-       </'rendered>
+       </div>
      </div>
    </div>
  )
