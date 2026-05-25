@@ -8,39 +8,36 @@
 		}
 	}
 
-	function setMaxAmount() {
+	function setMax() {
 		amount = $balance;
 	}
 
 </script>
 
 <style>
-
-	<div class='group'>
-		<label>Amount</label>
-		<div class='balance-info'>
-			<span>Balance: </span>
-			<a href='#' on:click|preventDefault={setMaxAmount}>
-				{parseFloat($balance).toFixed(4)}
-			</a>
-		</div>
-		<input type='number' bind:value={amount} min=0 max={$balance} />
-	</div>
-
-		<Button label='Cancel' on:click={hideModal} />
-	</div>
-
-</Modal>
-
-<style>
-	.balance-info {
-		font-size: 0.85rem;
-		margin-bottom: 0.5rem;
+		margin-bottom: var(--base-padding);
 	}
-	.balance-info a {
-		color: var(--primary);
+
+	.balance {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: var(--base-padding);
 	}
+
 </style>
+
+<Modal title='Deposit' on:close={closeModal}>
+	<div class='description'>
+		Deposit CAP into the pool to earn a share of trading fees.
+	</div>
+	
+	<div class='balance'>
+		<span>Wallet Balance: <a on:click={setMax}>{$balance ? $balance.toLocaleString() : 0} CAP</a></span>
+	</div>
+
+	<Input label='Amount' type='number' bind:value={amount} />
+
 <script>
 	import { onMount } from 'svelte';
 	import { withdraw } from '../../lib/pool';
@@ -51,36 +48,33 @@
 		}
 	}
 
-	function setMaxAmount() {
+	function setMax() {
 		amount = $poolBalance;
 	}
 
 </script>
 
 <style>
-
-	<div class='group'>
-		<label>Amount</label>
-		<div class='balance-info'>
-			<span>Available: </span>
-			<a href='#' on:click|preventDefault={setMaxAmount}>
-				{parseFloat($poolBalance).toFixed(4)}
-			</a>
-		</div>
-		<input type='number' bind:value={amount} min=0 max={$poolBalance} />
-	</div>
-
-		<Button label='Cancel' on:click={hideModal} />
-	</div>
-
-</Modal>
-
-<style>
-	.balance-info {
-		font-size: 0.85rem;
-		margin-bottom: 0.5rem;
+		margin-bottom: var(--base-padding);
 	}
-	.balance-info a {
-		color: var(--primary);
+
+	.balance {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: var(--base-padding);
 	}
+
 </style>
+
+<Modal title='Withdraw' on:close={closeModal}>
+		Withdraw CAP from the pool.
+	</div>
+
+	<div class='balance'>
+		<span>Available to Withdraw: <a on:click={setMax}>{$poolBalance ? $poolBalance.toLocaleString() : 0} CAP</a></span>
+	</div>
+
+	<Input label='Amount' type='number' bind:value={amount} />
+
+	<Button on:click={submit} isLoading={isSubmitting}>Withdraw</Button>
